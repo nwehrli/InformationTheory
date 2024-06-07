@@ -1,1 +1,55 @@
 \section{Foundations}
+\begin{mainbox}{Definitions}
+    \(\text{Information of an outcome }x\)
+    \[h(x) = - \log(p(x))\]
+    \(\text{Cross-Entropy between }p \text{ and }q\)
+    \[H(p; q) = - \sum_{x}p(x) \log q(x)\]
+    \text{Shannon Entropy}
+    \[H(p) = H(p; p) \]
+\end{mainbox}    
+\textbf{Notation} 
+
+We identify outcomes \(x\) with integers \(1, ..., m\) and associate probabilities \(p(x) \geq 0\).
+
+\(H(\frac{1}{m})\) for \(H(p)\) with \(p(x) = \frac{1}{m}\) (uniform)
+
+\(H(X) = H(p) = \E(-\log(p(X)))\) where \(p\) is the pdf of \(X\)
+
+% \begin{mainbox}
+%     {Convexity and Concavity}
+%     \begin{itemize}
+%         \item  A function \(f: \mathcal{D} \to \R\) over some convex Domain \(\mathcal{D}\) is\\ \textbf{(strictly) convex}, 
+%         if \(\forall z \neq z' \in \mathcal{D}, \forall \rho \in (0,1)\)
+%         \[f(\rho z + (1-\rho)z') \leq \rho f(z) + (1-\rho)f(z')\]
+%         \item \(g\) is \textbf{(strictly) concave} \(\iff\) \(f = - g \) is (strictly) convex
+%         \item \(f''(z) \geq 0, \forall z \in \mathcal{D} \iff f \text{ is convex over }\mathcal{D}\\
+%                 f''(z) > 0, \forall z \in \mathcal{D} \implies f \text{ is strictly convex over }\mathcal{D}\)
+%         \item \(f(\rho) = -\rho \log \rho \text{ is strictly concave for }\rho > 0\\
+%             H(p) \text{ is strictly concave}\)
+%     \end{itemize}
+% \end{mainbox}
+
+\begin{subbox}{Jensen's Inequality}
+    Let \(f\) be convex and \(g: [m] \to \R\) be an arbitrary function that assigns a value to each outcome.
+    \[f\left(\sum_{x}p(x)g(x)\right) \leq \sum_{x} p(x) f(g(x)), \forall p(x) \geq 0, \sum_x p(x) = 1\]
+    alternatively
+    \[f(\E(g(X))) \leq \E(f(g(X)))\]
+\end{subbox}
+
+Applying this inequality to relate Cross-Entropy and Entropy, we get the following properties.
+
+    By Jensen we have \[H(p; q) \geq H(p)\]
+    Definining KL divergence or Relative Entropy as
+    \begin{mainbox}{}
+    \[D(p || q) = \sum_{x} p(x) \log \frac{p(x)}{q(x)}\]
+    \end{mainbox}
+    we get
+    \[H(p; q) = H(p) + D(p || q)\]
+    Further investigating KL divergence, we find 
+    \begin{align}
+        D(p||q) &\geq 0\\
+        D(p||q) = 0 &\iff p = q
+    \end{align}
+    
+
+
