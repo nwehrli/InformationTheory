@@ -1,0 +1,24 @@
+\section{Compression}
+
+\begin{mainbox}
+    {Definition - Code} 
+    A code \(C\) is a mapping from outcomes to codewords
+    \[C: \{1, ..., m\} \to \{0, 1\}^*\]
+    \begin{itemize}[label=-]
+        \item If there is no codeword that is a prefix of another codeword, the code is a \textbf{prefix code}. 
+        \item Prefix codes retain injectivity when concatenating codewords.
+    \end{itemize}
+\end{mainbox}
+Sets of codewords fulfilling the prefix property can be uniquely represented by the leaves of a binary tree. 
+Since a leaf node has no children the prefix property is guaranteed.
+
+\begin{mainbox}
+    {Kraft's Inequality}
+    If \(\{c_1, ...,c_m\}\) are codewords of a prefix code, then 
+\begin{align}
+    \sum_{x}2^{-l_x} \leq 1, \text{ where }l_x = |c_x|
+\end{align}
+Conversely, given \(\{l_1, ..., l_m\} \subset \N\) satisfying (3), there exists a prefix code with those codeword lengths.
+\end{mainbox}
+
+
