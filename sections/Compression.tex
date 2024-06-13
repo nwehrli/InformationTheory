@@ -39,10 +39,51 @@ Conversely, given \(\{l_1, ..., l_m\} \subset \N\) satisfying (3), there exists 
     \[\overline{Y}_n := \frac{1}{n}\sum_{i = 1}^n Y_i \xrightarrow[]{\P} \mu \iff \lim_{n \to \infty}\P(|\overline{Y}_n - \mu| < \varepsilon) = 1, \forall \varepsilon > 0\]
 \end{mainbox}
 
-\textbf{Typicality}
+\textbf{Typicality - Asymptotic Equipartition}
 
 Let \(X_1, ..., X_n \overset{\text{iid}}{\sim} p\). The \(\varepsilon\)-typical outcomes are 
 \[\mathcal{A}_\varepsilon^n = \left\{x \in \{1, ..., m\}^n:\left|H(p)+ \frac{1}{n}\sum_{i = 1}^n \log p(x_i)\right| < \varepsilon\right\}\]
 
+By the law of large numbers for any \(p, \varepsilon > 0\) and \(\delta > 0\), there exists an \(n_0\), s.t. \(\forall n \geq n_0\)
+\[\P(A_\varepsilon^n)>1- \delta\]
+in particular for \(\delta = \varepsilon\).
 
+For all \(p, \varepsilon>0\) and \(n \in \N\), let \(x \in \mathcal{A}_\varepsilon^n\), then
+\[2^{-n(H(p)+\varepsilon)} \leq p(x) \leq 2^{-n(H(p)-\varepsilon)}\]
+\[(1-\varepsilon)2^{n(H(p)-\varepsilon)}\leq|\mathcal{A}_\varepsilon^n| \leq 2^{n(H(p)+\varepsilon)}\]
+\[\implies |\mathcal{A}_\varepsilon^n| \approx 2^{nH(p)} \text{ and for }x \in \mathcal{A}_\varepsilon^n: p(x) \approx 2^{-nH(p)} \]
 
+We define the AEP Code to encode whole sequences
+\[\text{AEP}_\varepsilon^n = \begin{cases}
+    0 B^n(x) &\text{if }x \notin \mathcal{A}_\varepsilon^n\\
+    1 C^n(x) &\text{otherwise}
+\end{cases}\]
+where we enumerate over the typical and atypical sequences.
+
+Then the average codeword length amortized over the encoding of the sequence \(x\) of \(n\) outcomes is
+\[\frac{1}{n}|C_\varepsilon^n(x)| \leq \frac{1}{n}(1+\log|\mathcal{A}_\varepsilon^n|) \leq H(p)+ \frac{1}{n} + \varepsilon\]
+\[\frac{1}{n}|B^n(x)| \leq \frac{1}{n}(1 + \log m^n) \leq \log m + \frac{1}{n}\]
+This result is theoretically optimal but practically not very useful.
+
+\textbf{Huffman Codes}
+
+Let \(X\) have outcomes \(\{1, ..., m\}\) ordered (wlog) st. \(p(1) \geq ... \geq p(m)\). 
+
+The Huffman contraction \(X'\) of \(X\) is defined as 
+\[X' = \min\{m-1, X\}\]
+We define the Huffman Code \(C\) for \(X\) recursively from \(C'\) for the H. contraction \(X'\)
+\[C(x) = \begin{cases}
+    x-1 &\text{if }m = 2\\
+    C'(x)0 &\text{if }x = m-1 \land m > 2\\
+    C'(x-1)1 &\text{if } x = m \land m > 2\\
+    C'(x) &\text{otherwise} 
+\end{cases}\]
+
+Let \(C\) be a length-optimal code, then 
+\[p(x) > p(x') \implies l_x \leq l_{x'}\]
+\[\forall c \in \text{Img}(C) \text{ wt. } |c| \text{ maximal}: \exists c' \in \text{Img}(C). \ c' \text{ sibling of }c \]
+
+Assume \(p_i\) ordered as above. Then a length-optimal prefix code \(C\) with 
+\(l_1 \leq ...\leq l_{m-1} = l_m\) and \(c_{m-1}, c_m\) only differing in last bit, is called \textbf{canonical}.
+
+Huffman codes are length-optimal.
