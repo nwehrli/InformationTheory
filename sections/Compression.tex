@@ -20,5 +20,29 @@ Since a leaf node has no children the prefix property is guaranteed.
 \end{align}
 Conversely, given \(\{l_1, ..., l_m\} \subset \N\) satisfying (3), there exists a prefix code with those codeword lengths.
 \end{mainbox}
+\begin{itemize}
+    \item Codes for which Kraft's inequality is strict can be optimized by codeword pruning.
+    \item A prefix is succinct, if Kraft's inequality holds with a equality.
+    \item Succinct codes uniquely define a dyadic probabilistic model
+    \[q(x) = 2^{- l_x}\]
+    \item Expected codeword length of a prefix code \(C\) 
+    \[L(C) = \sum_{x}p(x) l_x = \sum_{x}p(x) (-\log q(x)) = H(p; q)\]
+    \item Using \(H(p; q) = H(p) + D(p || q)\) we can deduce that the minimal \(L(C)\) for a binary prefix code \(C\) is
+    \[L* = H(p) + \min_{q: \text{dyadic}} D(p || q)\]
+    \item Thus the closer \(q\) is to \(p\), the more optimal the prefix code is. 
+    But since \(p\) doesn't have to be dyadic there can be an inherent suboptimality based on rounding.
+\end{itemize}
+
+\begin{mainbox}
+    {Weak Law of Large Numbers}
+    Let \(Y_1, ..., Y_n\) be iid. random variables with mean \(\mu\). Then 
+    \[\overline{Y}_n := \frac{1}{n}\sum_{i = 1}^n Y_i \xrightarrow[]{\P} \mu \iff \lim_{n \to \infty}\P(|\overline{Y}_n - \mu| < \varepsilon) = 1, \forall \varepsilon > 0\]
+\end{mainbox}
+
+\textbf{Typicality}
+
+Let \(X_1, ..., X_n \overset{\text{iid}}{\sim} p\). The \(\varepsilon\)-typical outcomes are 
+\[\mathcal{A}_\varepsilon^n = \left\{x \in \{1, ..., m\}^n:\left|H(p)+ \frac{1}{n}\sum_{i = 1}^n \log p(x_i)\right| < \varepsilon\right\}\]
+
 
 
