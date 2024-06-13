@@ -12,25 +12,24 @@
 Sets of codewords fulfilling the prefix property can be uniquely represented by the leaves of a binary tree. 
 Since a leaf node has no children the prefix property is guaranteed.
 
-\begin{mainbox}
-    {Kraft's Inequality}
+\vspace*{1mm}
+\textbf{Kraft's Inequality}
+
     If \(\{c_1, ...,c_m\}\) are codewords of a prefix code, then 
 \begin{align}
     \sum_{x}2^{-l_x} \leq 1, \text{ where }l_x = |c_x|
 \end{align}
 Conversely, given \(\{l_1, ..., l_m\} \subset \N\) satisfying (3), there exists a prefix code with those codeword lengths.
-\end{mainbox}
-\begin{itemize}
-    \item Codes for which Kraft's inequality is strict can be optimized by codeword pruning.
-    \item A prefix is succinct, if Kraft's inequality holds with a equality.
-    \item Succinct codes uniquely define a dyadic probabilistic model
+\begin{itemize}[label=-]
+    \item A prefix is \textbf{succinct}, if Kraft's inequality holds with a equality. Else it can be optimized by pruning.
+    \item Succinct codes uniquely define a \textbf{dyadic probabilistic model}
     \[q(x) = 2^{- l_x}\]
     \item Expected codeword length of a prefix code \(C\) 
     \[L(C) = \sum_{x}p(x) l_x = \sum_{x}p(x) (-\log q(x)) = H(p; q)\]
-    \item Using \(H(p; q) = H(p) + D(p || q)\) we can deduce that the minimal \(L(C)\) for a binary prefix code \(C\) is
-    \[L* = H(p) + \min_{q: \text{dyadic}} D(p || q)\]
+    \item Using \(H(p; q) = H(p) + D(p || q)\) we can deduce that the \textbf{minimal \(L(C)\)} for a binary prefix code \(C\) is
+    \[L^* = H(p) + \min_{q: \text{dyadic}} D(p || q)\]
     \item Thus the closer \(q\) is to \(p\), the more optimal the prefix code is. 
-    But since \(p\) doesn't have to be dyadic there can be an inherent suboptimality based on rounding.
+    But since \(p\) doesn't have to be dyadic there can be an \textbf{inherent suboptimality} based on rounding.
 \end{itemize}
 
 \begin{mainbox}
@@ -58,13 +57,14 @@ We define the AEP Code to encode whole sequences
     0 B^n(x) &\text{if }x \notin \mathcal{A}_\varepsilon^n\\
     1 C^n(x) &\text{otherwise}
 \end{cases}\]
-where we enumerate over the typical and atypical sequences.
+where we \textbf{enumerate} over the typical and atypical sequences.
 
-Then the average codeword length amortized over the encoding of the sequence \(x\) of \(n\) outcomes is
+Then the average codeword length \textbf{amortized} over the encoding of the sequence \(x\) of \(n\) outcomes is
 \[\frac{1}{n}|C_\varepsilon^n(x)| \leq \frac{1}{n}(1+\log|\mathcal{A}_\varepsilon^n|) \leq H(p)+ \frac{1}{n} + \varepsilon\]
 \[\frac{1}{n}|B^n(x)| \leq \frac{1}{n}(1 + \log m^n) \leq \log m + \frac{1}{n}\]
 This result is theoretically optimal but practically not very useful.
 
+\vspace*{1mm}
 \textbf{Huffman Codes}
 
 Let \(X\) have outcomes \(\{1, ..., m\}\) ordered (wlog) st. \(p(1) \geq ... \geq p(m)\). 

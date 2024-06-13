@@ -1,1 +1,37 @@
 \section{Prediction}
+
+A betting strategy \(b\) bets a fraction \(b(x)\) on the \(x\)-th outcome.
+
+The bookmaker provides odds 1-for-\(q(x)\) for each outcome \(x\).
+
+\[S(X) = \frac{b(X)}{q(X)}\] is a random variable which describes the wealth growth of a gamble.
+\begin{itemize}[label=-]
+    \item Maximizing \(\E(S(X))\) over all possible \(b\) results in betting all on the highest probable outcome. 
+    \item Let \(X_1,...,X_n \sim p\) iid. \[S_n := S(X_1, ..., X_n) = \prod_{i = 1}^{n}S(X_i)\]
+    \item Any strategy with \(b(x) = 0, p(x) > 0\) for some \(x\) will almost surely fail for increasing \(n\).
+    \item \textbf{Doubling Rate}
+    \[W(b) = \E(\log S(X)) = \sum_{x} p(x) \log \frac{b(x)}{q(x)}\]
+    \item Odds 1-for-\(q\) are \textbf{fair}, if \(\sum_{x}q(x) = 1\)
+    \item In general, for fair odds, we have \[W(b) = D(p || q) - D(p || b)\]
+    which is \textbf{optimal} for \(b = p\), since then \(D(p || b) = 0\).
+    \item \textbf{Conservation Theorem.} For \(q\) uniform, fair and \(b = p\). 
+    \[W(b) + H(p) = \log m\] 
+    \item With fair odds, withholding part of the budget doesn't gain anything.
+    \item If we have \(Q = \sum_{x} q(x) < 1\), Kelly-betting (\(b = p\)) remains optimal in expectation. 
+    But the \textbf{Dutch book} 
+    \[b(x) := \frac{q(x)}{Q} \implies S(X) = \frac{b(X)}{q(X)} = \frac{1}{Q} > 1\]
+    has a \textbf{guaranteed} doubling rate \(W(b) = - \log Q > 0\).
+\end{itemize}
+Consider an offered bet, where we can bet \(b \in [0, 1]\). We receive \(\alpha b\) on a win and pay \(\beta b\) on a loss.
+Then \[W(b) = p \log(1 + \alpha b) + (1-p) \log(1- \beta b)\]
+We can find an optimal strategy using analysis (taking care of border cases).
+% First and second derivatives
+% \[W'(b) = \frac{\alpha b}{1+ \alpha b} - \frac{\beta (1-p)}{1-\beta b}, \ W''(b) = -\frac{\alpha^2 p}{(1+\alpha b)^2} - \frac{\beta^2(1-p)}{(1-\beta p)^2} < 0\]
+\textbf{Kelly Criterion.} 
+\[b^* = \min\{1, \max\{0, b\}\}, \qquad b = \frac{p}{\beta} - \frac{1-p}{\alpha}\]
+
+% There is a corollary missing here, which seems wrong.
+
+% \textbf{Risky bets.} With \(\beta = 1\) and \(p \to 0\) while fixing \(\alpha p\), one gets
+% \[\alpha b^* = \alpha p - (1-p) \to \alpha p\]
+

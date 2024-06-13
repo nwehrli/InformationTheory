@@ -28,21 +28,19 @@ We identify outcomes \(x\) with integers \(1, ..., m\) and associate probabiliti
 %             H(p) \text{ is strictly concave}\)
 %     \end{itemize}
 % \end{mainbox}
+\vspace*{1mm}
+\textbf{Jensen's Inequality}
 
-\begin{subbox}{Jensen's Inequality}
     Let \(f\) be convex and \(g: [m] \to \R\) be an arbitrary function that assigns a value to each outcome.
     \[f\left(\sum_{x}p(x)g(x)\right) \leq \sum_{x} p(x) f(g(x)), \forall p(x) \geq 0, \sum_x p(x) = 1\]
     alternatively
     \[f(\E(g(X))) \leq \E(f(g(X)))\]
-\end{subbox}
 
-Applying this inequality to relate Cross-Entropy and Entropy, we get the following properties.
 
-    By Jensen we have \[H(p; q) \geq H(p)\]
-    Definining KL divergence or Relative Entropy as
-    \begin{mainbox}{}
+Applying this inequality to relate \textbf{Cross-Entropy} and \textbf{Entropy}, we get the following properties.
+\[H(p; q) \geq H(p)\]
+    Definining \textbf{KL divergence} or \textbf{Relative Entropy} as
     \[D(p || q) = \sum_{x} p(x) \log \frac{p(x)}{q(x)}\]
-    \end{mainbox}
     we get
     \[H(p; q) = H(p) + D(p || q)\]
     Further investigating KL divergence, we find 
@@ -50,7 +48,7 @@ Applying this inequality to relate Cross-Entropy and Entropy, we get the followi
         D(p||q) &\geq 0\\
         D(p||q) = 0 &\iff p = q
     \end{align}
-    A further consequence of (1) is that the uniform distribution maximizes entropy.
+    A further consequence of (1) is that the uniform distribution \textbf{maximizes} entropy.
     \begin{align*}
         H\left(\frac{1}{m}\right) = \max_{p}H(p)
     \end{align*}
