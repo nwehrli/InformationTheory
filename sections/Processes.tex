@@ -1,0 +1,32 @@
+\section{Processes}
+
+A semi-infinite sequence of random variables \(X_1, X_2, ... \) is a \textbf{stochastic process}.
+
+\begin{itemize}[label=-]
+    \item A process is \textbf{stationary} if, for any \(n \in \N\) and any \(\Delta \geq 0\) 
+    \[\P(X_1, ..., X_n) = \P(X_{1+\Delta}, ..., X_{n+\Delta})\] 
+    \item \textbf{Conditional Entropy Rate.} 
+    \[H(X) = \lim_{t \to \infty} H(X_{t+1} | X_t, ..., X_1)\]
+    \item \(X\) stationary \(\implies\) \(H(X)\) well-defined.
+    \item \textbf{Entropy Rate.} \[H'(X) = \lim_{t \to \infty} \frac{1}{t}H(X_1, ..., X_t)\] 
+\end{itemize}
+
+A \textbf{Markov Chain} is a stochastic process for which 
+\[X_{t+1} \perp X_{t-1}, ..., X_1 | X_t\]
+
+Let \(X\) be a Markov Chain and \(\pi := P(X_1)\).
+\begin{itemize}[label=-]
+    \item then by the independence from past and future
+    \[\P(X_1, ..., X_t) = \P(X_1)\P(X_2|X_1)\P(X_3|X_2)\cdots \P(X_t | X_{t-1})\]
+    \item \(X\) is \textbf{time-homogeneous}, if \[\P(X_{t+1}|X_t) = \P(X_2|X_1), \qquad \forall t \geq 1\]
+    \item A time-homogeneous Markov Chain is fully characterized by its initial distribution and the \textbf{transition matrix} \(P\) with 
+    \[P_{ij} := \P(X_2 = i | X_1 = j)\] 
+    then \[\P(X_{i+r} = b | X_i = a) = (P^r)_{ba}\]
+    \item time-homogeneous M.C. \textbf{stationary} \\\(\iff\) \(\pi\) stationary \(\iff\) \(P \pi = \pi\)
+    \item\textbf{Entropy Rate} of a stationary time-homogeneous M.C. 
+    \[H'(X) = H(X) = \sum_{a}\pi_a \left(- \sum_{b}P_{ba} \log P_{ba}\right)\]
+    Note that \(H' = H\) if \(X\) is \textbf{stationary}.
+    \item A M.C. is \textbf{ergodic}, iff. \(\exists t \geq 1\) s.t. \((P^t)_{ij} > 0, \forall i, j.\)
+    \item An M.C. \textbf{ergodic} \(\iff\) has a unique stationary distribution
+\end{itemize}
+
