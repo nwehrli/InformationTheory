@@ -22,11 +22,45 @@ Let \(X\) be a Markov Chain and \(\pi := P(X_1)\).
     \item A time-homogeneous Markov Chain is fully characterized by its initial distribution and the \textbf{transition matrix} \(P\) with 
     \[P_{ij} := \P(X_2 = i | X_1 = j)\] 
     then \[\P(X_{i+r} = b | X_i = a) = (P^r)_{ba}\]
-    \item time-homogeneous M.C. \textbf{stationary} \\\(\iff\) \(\pi\) stationary \(\iff\) \(P \pi = \pi\)
+    \item M.C. \(X\) \textbf{stationary} \\\(\iff\) \(\pi\) stationary and \(X\) time-homogeneous \(\iff\) \(P \pi = \pi\)
     \item\textbf{Entropy Rate} of a stationary time-homogeneous M.C. 
     \[H'(X) = H(X) = \sum_{a}\pi_a \left(- \sum_{b}P_{ba} \log P_{ba}\right)\]
     Note that \(H' = H\) if \(X\) is \textbf{stationary}.
     \item A M.C. is \textbf{ergodic}, iff. \(\exists t \geq 1\) s.t. \((P^t)_{ij} > 0, \forall i, j.\)
     \item An M.C. \textbf{ergodic} \(\iff\) has a unique stationary distribution
+    \item For stationary M.C. \(H(X_t | X_1) \leq H(X_{t+1}|X_1)\).
 \end{itemize}
+\textbf{Reversible Chains.}
+
+For any finite Markove Chain \(X\)
+\[\P(X_1, ...,X_t) = \P(X_t)\P(X_{t-1}|X_t)\cdots \P(X_1|X_2)\]
+For a t.-h. M.C. \(X\) with stationary distribution \(\pi > 0\) and transition matrix \(P\), 
+then the backwards transitions are characterized by
+\[U_{ab} = P_{ba}\frac{\pi_a}{\pi_b}\]
+and \(X\) is \textbf{reversible} \(\iff\) \(P = U\) \(\iff\) \(P_{ba}\pi_a = P_{ab}\pi_b\).
+
+\textbf{Random Walks on Graphs.}
+
+Consider an undirected graph with nodes \(\{1, ..., m\}\) and edge weights \(w_{ab} = w_{ba} \geq 0\). 
+We define a random walk as a Markov Chain
+\[P_{ba} = \frac{w_{ab}}{W_a}, \quad W_a = \sum_{b}w_{ab}\]
+\begin{itemize}[label=-]
+    \item It has a stationary distribution \(\pi_a = \frac{W_a}{W}\) with \(W = \sum_a W_a\).
+    \item Graph connected \(\implies\) this stationary distribution is unique.
+    \item A random walk on an undirected graph is reversible.
+    \item Every t.-r. M.C. is equivalent to a random walk on a graph.
+\end{itemize}
+\textbf{Thermodynamics}
+
+Let \((X, Y)\) and \(X', Y'\) be R.V. pairs over the same probability space, then
+\[D(\P(X, Y) || \P(X', Y')) = D(\P(X) || \P(X')) + D(\P(Y|X) || \P(Y'|X'))\]
+
+Let \(X\) be a t.-h. M.C. with \(\mu, v\) different PMF over states, then
+\[D(P\mu || Pv) \leq D(\mu || v) \quad \forall \mu, v\]
+with \(\pi\) stationary
+\[D(\mu || \pi) \geq D(P \mu || \pi)\]
+if addionally \(X\) is reversible
+\[D(\mu || \pi) > D(P\mu || \pi), \quad \forall \mu \neq \pi.\]
+
+
 
