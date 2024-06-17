@@ -1,2 +1,58 @@
 \section{Universal Coding}
 
+A CDF \(F_X\) induces a partition of \([0; 1)\) into 
+\[\{I_x: x \in X(\Omega)\}, \qquad I_x := [F_X(x) - p_X(x); F_X(x))\]
+For \(I = [a, b) \subseteq I\) there exists \(z \in I, (z)_2 = 0.z_1z_2...z_l\)
+with \(l = \lceil - \log(b-a)\rceil\) (\textit{there's short representation for every Interval \(I\)}).
+
+\textbf{Shannon-Fano-Elias Codes}
+\begin{itemize}[label=-]
+    \item pick midpoint \(z_x = \sum_{x' < x} p_X(x') + \frac{1}{2}p_X(x)\)
+    \item truncate to \(\lceil - \log p_X(x) \rceil + 1\) bits
+\end{itemize}
+Prefix-free, but not wasteful. Idea can be translated into 
+
+\textbf{Arithmetic Coding}
+
+Note that Huffman Codes require knowledge of the distribution and cannot easiy be adapted to changing distributions.
+
+Consider a stochastic process made of \(X_t: \Omega \to A, A := \{0, ..., m-1\}\). We define 
+\[Z = (0.X_1X_2...)_m \in [0, 1] \subset \R\]
+For any \(Z\). If \(F_Z\) is a \textbf{bijection}, then \(U := F_Z(Z) \sim \mathcal{U}([0,1])\).
+
+Then \(F_U(u) = u\) and \(U = (0.U_1U_2...) \implies U_i \overset{iid}{\sim} \text{Bernoulli}\left(\frac{1}{2}\right)\).
+
+\begin{itemize}[label=-]
+    \item encoder \(x_1, x_2,... \mapsto z = (0.x_1x_2...)_m \overset{F_Z}{\mapsto} u = (0.u_1u_2...)_2\)
+    \item decoder \(u \overset{F_Z^{-1}}{\mapsto} z = (0.x_1x_2...)_m \mapsto x_1x_2\)
+\end{itemize}
+
+Consider \(X =(X_1, ...,X_n)\) with \(X: \Omega \to A^n\) and thus \(m^n\) possible outcomes.
+
+\(F_X\) induces a partitioning \(\{I_x: x = (x_1, ..., x_n)\}\) as defined above.
+
+The \textbf{arithmetic code} is given by the S.-F.-E. code for \(x\).
+
+For the arithmetic code \(C\), we have
+\[\lim_{n \to \infty} \frac{1}{n}\E(|C(X_1, ..., X_n)|) = H(\{X_t\})\]
+\textbf{Incremental refinement} of \(I_x\) for \(x=(x_1,...,x_n)\) into \(m\) subinterval using 
+\[\P(X_n+1 | X_1 = x_1, ..., X_n = x_n)\] 
+\textbf{Lempel-Ziv Code}
+
+We denote a string to be compressed as 
+\[x = x_{-s}x_{-s+1}...x_{-1}x_0x_1...x_t\]
+where \(x_0, ..., x_t\) still needs to be encoded.
+
+\textbf{Matching.}
+\[\text{match}(x) := \{(j, l) \mid x_{-j}...x_{-j+l-1} = x_{0}...x_{l-1} \land j, l \geq 1\}\]
+The \textbf{Maximal Matching} is \((j^*, l^*) \in \text{match}(x)\) is maximal in \(l\) and as tiebreaker minimal in \(j\).
+
+\textbf{Lempel-Ziv Code.}
+\[c(x) = \begin{cases}
+    (0, x_0)c(x_1...x_t) & \text{if match}(x) = \emptyset\\
+    (1, j^*, l^*)c(x_{l^*}...x_t) & \text{otherwise}
+\end{cases}\]
+An integer \(x\) can be encoded with \(\leq \log x + 2 \log \log x + 4\) bits.
+\[C'(x) = 00...01(x)_2, \quad |C'(x)| = 2 \lceil \log x \rceil + 1\]
+and we construct
+\[C(x) = C'(\lceil \log x\rceil)1(x)_2, \quad |C(x)| \leq \log x + 2 \log \log x + 4\]
