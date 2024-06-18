@@ -1,0 +1,83 @@
+\section{Channel Coding}
+
+A noisy channel is a conditional probability distribution \(\P_{Y|X}\), 
+where \(X: \Omega \to \mathcal{X}\) is the input and \(Y: \Omega \to \mathcal{Y}\) the output. 
+The noise reduces the information from \(H(X)\) to \(I(X;Y)\).
+
+\textbf{Channel Capacity.} Given a channel with \(\P_{Y|X}\) its capacity is
+\[R^* = \max_{\P_X} I(X;Y)\]
+
+\[w \in [1:m] \overset{\text{enc.}}{\mapsto} x = f(w) \in \mathcal{X} \overset{\text{channel}}{\mapsto} 
+y \in \mathcal{Y} \overset{\text{dec.}}{\mapsto} \hat{w} = g(y) \in [0:m]\]
+
+\textbf{Binary Symmetric Channel.}
+
+A BSC(\(n, \eta\)) is a channel with \(\mathcal{X} = \mathcal{Y} = \{0, 1\}^n\), with 
+\[\P(Y_{1:n}|X_{1:n}) = \prod_{i = 1}^n \P(Y_i|X_i), \ \text{where } Y_i = X_i \oplus N_i, \ N_i \overset{iid}{\sim}\text{Ber}(\eta)\]
+The probability of communication error is \(P_e = 1 - (1- \eta)^n\).
+
+A \textbf{codebook} \(\mathcal{C} = \{x(1), ..., x(m)\} \subseteq \{0, 1\}^n\) 
+maps each message \(w \in [1:m]\) to a unique binary codeword \(x(w)\). 
+
+\textbf{Bayes-optimal Decoder.} For a codebook \(\mathcal{C}\) the min. error probability decoder is given by
+\[\hat{w} = g(y) = f^{-1}(\hat{x}), \quad \hat{x} = \underset{x \in \mathcal{C}}{\arg \max} \ \P(x | y)\]
+For \(X\) uniform, the Bayes-optimal decoder is the \textbf{maximum likelihood} decoder, 
+i.e. \(\hat{x} = \underset{x \in \mathcal{C}}{\arg \max} \ \P(y | x)\).
+
+\textbf{Joint Typicality.} Consider \(n\) pairs of R.V. \((X_i, Y_i) \overset{iid}{\sim} \P\). 
+Then for any \(\varepsilon > 0\) define the jointly typical sets via 
+\begin{align*}
+    \mathcal{B}_{\varepsilon}^n = &\{(x_{1:n}, y_{1:n}): |H(X,Y) + \frac{1}{n}\log p(x_{1:n}, y_{1:n})| < \varepsilon \land \\ 
+    &|H(X) + \frac{1}{n}\log p(x_{1:n})| < \varepsilon \land |H(Y) + \frac{1}{n}\log p(y_{1:n})| < \varepsilon \}
+\end{align*}
+\textbf{Joint AEP.} In the same setting as above
+\begin{enumerate}[label=(\roman*)]
+    \item \(\P(\mathcal{B}_\varepsilon^n) \to 1\), as \(n \to \infty\)
+    \item \(\log |\mathcal{B}_\varepsilon^n| \leq n (H(X, Y)+\varepsilon)\), for all \(n\) large enough.
+\end{enumerate}
+\textbf{Decoding by Joint Typicality.}
+Assume codeb. \(\mathcal{C}\) and \(y\) received.
+\begin{enumerate}
+    \item \(\mathcal{C}_\varepsilon(y) := \{x \in \mathcal{C}: (x, y) \in \mathcal{B}_\varepsilon^n\}\)
+    \item If \(\mathcal{C}_\varepsilon(y) = \{x\}\), then decode \(g(y) = f^{-1}(x)\).
+    \item otherwise declare an inability to decode by setting, \(g(y) = 0\).
+\end{enumerate}
+\textbf{Random Codebooks.}
+Generate a random codebook from \(m \cdot n\) fair coin tosses
+\[X_i(w) \overset{iid}{\sim} \text{Ber}\left(\frac{1}{2}\right), \qquad w \in [1:m], i \in [1:n]\]
+Define events
+\[E_w = (X(w), Y(1)) \in \mathcal{B}_\varepsilon^n\]
+Expected probability error of typicality Decoding
+\[P_\varepsilon = \P(E_1^c \cup E_2 \cup ... \cup E_m)\]
+With Union Bound and typicality (\(\P(E_1^c) \leq \varepsilon\) for all \(n \geq n_0(\varepsilon)\))
+\[P_\varepsilon \leq \P(E_1^c) + \sum_{i = 2}^m \P(E_i) \leq \varepsilon + m \P(E_2)\]
+
+To further bound the error we consider the following \textbf{Lemma:}
+
+Let \((X_i, Y_i) \overset{iid}{\sim} \P(X, Y)\) and 
+\((\overline{X}_i, \overline{Y}_i) \overset{iid}{\sim} \P(X)\P(Y), i \in [1:n]\).
+For large enough \(n\)
+\[\P((\overline{X}_{1:n}, \overline{Y}_{1:n}) \in \mathcal{B}_\varepsilon^n) \leq 2^{-n(I(X;Y) - 3 \varepsilon)}\]
+
+With the lemma and noting \(m = 2^{nR}\), we get for any \(\varepsilon > 0\) and large enough \(n\)
+\[P_\varepsilon \leq \varepsilon + 2^{nR} 2^{-n(I(X;Y) - 3 \varepsilon)} \leq \varepsilon + 2^{-n\kappa}\]
+ with \(\kappa = I(X;Y) - R - 3 \varepsilon\). Thus as long as \(R < I(X;Y)\) we have \(P_\varepsilon \to 0\) 
+ for \(n \to \infty\). Note then \(\kappa > 0\) since \(\varepsilon > 0\) can be arbitrary.
+
+ Note that \(P_\varepsilon\) is the \textbf{expected error} over all possible codebooks (uniformly chosen). 
+ To find a codebook with an error \(\leq P_\varepsilon\) one could do an exhaustive search over 
+ all codebooks (\textbf{not practical}).
+
+\vspace*{1mm}
+ \textbf{Channel Coding Theorem.} Consider a BSC(\(n, \eta\)). For any rate \(R < R^* = 1- H(\eta)\) we can 
+ communicate \(m = 2^{nR}\) distinct messages with an average error \(P_\varepsilon \to 0\) for \(n \to \infty\). 
+
+ The \textbf{Hamming Distance} between \(x, x' \in \{0,1\}^n\) is the number of bits they differ.
+ \[d_H(x, x') = \sum_{i = 1}^n x_i(1-x'_i)+(1-x_i)x'_i = \sum_{i = 1}^n (x_i + x'_i)-2x_ix'_i\]
+In BSC(\(n, \eta\)) with \(\P(X)\) \textbf{uniform (!)} and \(\eta < \frac{1}{2}\), optimal 
+decoding wrt. to \(\mathcal{C}\) is characterized by \[x^* = \underset{x \in \mathcal{C}}{\arg \max} \ \P(y|x) = \underset{x \in \mathcal{C}}{\min} d_H(x, y)\] 
+\textbf{Detecting single-bit corruptions.}
+Let \(\mathcal{C} = \{0, 1\}^n\) be a codebook and \(y\) be received with atmost one bit corruption from input \(x\).
+We construct \(\mathcal{C}' \subseteq \{0,1\}^{n+1}\) with an appended parity bit for every \(x \in \mathcal{C}\).
+\[x \mapsto x' = \left(x_1, ..., x_n, \sum_{i = 1}^n x_i \mod 2\right)\]
+Then \(\underset{x'\neq z' \in \mathcal{C}'}{\min} d_H(x', z') \geq 2\)

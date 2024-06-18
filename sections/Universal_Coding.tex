@@ -47,7 +47,7 @@ where \(x_0, ..., x_t\) still needs to be encoded.
 \[\text{match}(x) := \{(j, l) \mid x_{-j}...x_{-j+l-1} = x_{0}...x_{l-1} \land j, l \geq 1\}\]
 The \textbf{Maximal Matching} is \((j^*, l^*) \in \text{match}(x)\) is maximal in \(l\) and as tiebreaker minimal in \(j\).
 
-\textbf{Lempel-Ziv Code.}
+\textbf{LZ77.}
 \[c(x) = \begin{cases}
     (0, x_0)c(x_1...x_t) & \text{if match}(x) = \emptyset\\
     (1, j^*, l^*)c(x_{l^*}...x_t) & \text{otherwise}
@@ -56,3 +56,4 @@ An integer \(x\) can be encoded with \(\leq \log x + 2 \log \log x + 4\) bits.
 \[C'(x) = 00...01(x)_2, \quad |C'(x)| = 2 \lceil \log x \rceil + 1\]
 and we construct
 \[C(x) = C'(\lceil \log x\rceil)1(x)_2, \quad |C(x)| \leq \log x + 2 \log \log x + 4\]
+LZ77 is optimal (i.e. reaches the shannon limit).
