@@ -77,7 +77,19 @@ With the lemma and noting \(m = 2^{nR}\), we get for any \(\varepsilon > 0\) and
 In BSC(\(n, \eta\)) with \(\P(X)\) \textbf{uniform (!)} and \(\eta < \frac{1}{2}\), optimal 
 decoding wrt. to \(\mathcal{C}\) is characterized by \[x^* = \underset{x \in \mathcal{C}}{\arg \max} \ \P(y|x) = \underset{x \in \mathcal{C}}{\min} d_H(x, y)\] 
 \textbf{Detecting single-bit corruptions.}
+
 Let \(\mathcal{C} = \{0, 1\}^n\) be a codebook and \(y\) be received with atmost one bit corruption from input \(x\).
 We construct \(\mathcal{C}' \subseteq \{0,1\}^{n+1}\) with an appended parity bit for every \(x \in \mathcal{C}\).
 \[x \mapsto x' = \left(x_1, ..., x_n, \sum_{i = 1}^n x_i \mod 2\right)\]
 Then \(\underset{x'\neq z' \in \mathcal{C}'}{\min} d_H(x', z') \geq 2\)
+
+\textbf{Hamming Code.}
+
+Blocklength \(n = 2^k-1\) with \(k\) parity bits and \(2^k-k-1\) data bits. 
+
+The \(i\)-th parity bit is at position \(2^{i-1}\) with \(i \in [1:k]\) and 
+covers all positions where the \(i\)-th least significant bit is set (including itself).
+
+The sum of positions of the mismatched parity bits gives the position of the corrupted bit.
+
+The rate achieved is \[R = \frac{2^k-k-1}{2^k-1}\]

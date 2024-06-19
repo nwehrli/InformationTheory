@@ -1,0 +1,67 @@
+\section{Lossy Coding}
+\textbf{Rate-Distortion Theory}
+
+\textbf{Distortion measure} 
+\(d: \mathcal{X} \times \mathcal{X} \to \R_{\geq 0}, \text{s.t. } d(x, x) = 0 (\forall x)\).
+
+Examples include Hamming Distance and MSE. 
+We consider \(\E(d(X, \hat{X}))\), where \(X\) is original data and \(\hat{X}\) its reconstruction. 
+
+\textbf{Rate Distortion Theorem.}
+The maximal rate \(R(D)\) at which \(X\) (\(\P(X)\) given) can 
+be encoded with  \(\E(d(X, \hat{X})) \leq D\) is given by
+\[R(D) = \underset{\P(\hat{X}|X): \E(d(X, \hat{X}))}{I(X, \hat{X})}\]
+Consider the specific Case \(X_t \overset{iid}{\sim} \text{Ber}(p)\) and \(d(x^n, \hat{x}^n) = \frac{1}{n}d_H(x^n, \hat{x}^n)\).
+Then requiring \(\P(X_t \neq \hat{X}_t) \leq \eta\) (wlog. \(\eta \leq p\leq 1/2\)), 
+and minimizing the mutual information \(I(X;\hat{X})\) gives us a symmetric backwards channel 
+\[\P(X|\hat{X}) = \left[\begin{matrix}
+    1-\eta & \eta\\
+    \eta & 1-\eta
+\end{matrix}\right], \text{ and thus } \hat{X}_t \overset{iid}{\sim} \text{Ber}(q) \text{ with } q = \frac{p - \eta}{1-2\eta} \]
+which gives us a optimal forward channel (it's asymmetric).
+
+This gives a rate of \(R(\eta) = H(p) - H(\eta)\) as a specific case of the Rate-Distortion Theorem.
+
+\textbf{Distortion-Typicality.} A pair \((x, \hat{x})\) is \((\varepsilon, \delta)\)-d-typical, 
+if it is jointly \(\varepsilon\)-typical and \(|\eta - d(x^n, \hat{x}^n)| < \delta\) (\(\eta\) is the expected bit error).
+
+% Proof of Rate Distortion theorem not included here.
+\vspace*{1mm}
+\textbf{Uniform Quantization}
+Let \(U: \Omega \to R \subseteq \R\) (Scalar Quantization). 
+We partition \(R\) into intervals \(R_j\) of length \(\Delta\), assuming \(|R| < \infty\).
+
+We can then approximate the pdf \(p(u)\) by a step function \(\hat{p}(u)\), which is constant over \(R_j\).
+\[\hat{p}(u) = \sum_{j}\mathbb{I}\{u \in R_j\} \frac{\P(u \in R_j)}{\Delta} 
+= \sum_{j}\mathbb{I}\{u \in R_j\} \frac{\int_{R_j}p(u)du}{\Delta}\]
+Let \(V\) be an RV characterized by \(\hat{p}\). Then \(\E((U-V)^2) \approx \frac{\Delta^2}{12}\).
+
+If \(U \sim \mathcal{U}([a, b])\) and we want the constant \(x\) minimizing MSE. Then the optimal point is 
+\(x = \frac{a+b}{2}\) with an MSE of \(\frac{(a+b)^2}{12}\).
+
+\textbf{Differential Entropy.} Let \(U: \Omega \to R \subseteq \R\). The differential entropy is defined as
+\[h(U) = - \int_{R}p(u) \log p(u) du\]
+
+% The H(V) \approx h(U) - log \Delta derivation does not make sense.
+We have \(H(V) \approx h(U) - \log \Delta\).
+
+To be more precise we have 
+\[H(V) + \log \Delta \to h(U), \ \text{ as } \Delta \to 0\]
+
+Let \(U \sim \mathcal{N}(0, \sigma^2)\). Then if we accept a MSE of at most \(\eta\), \(U\) can 
+be quantized at a rate \[R(\eta) = \begin{cases}
+    \frac{1}{2}(\log \sigma^2 - \log \eta) & \text{if } \eta \leq \sigma^2\\
+    0 & \text{otherwise}
+\end{cases}\]
+
+\textbf{Shannon's Lower Bound.} Let \(U: \Omega \to R\subseteq \R\) with \(h(U) < \infty\) 
+and \(h^*\) the differential entropy \(h^*(\sigma^2)\) of a gaussian. Then \(U\) can be encoded with 
+MSE at most \(\eta\) at a rate \(R > R(\eta)\), where 
+\[R(\eta) \geq h(U) - h*(\eta)\]
+
+For \(U: \Omega \to R \subseteq \R^d, d>1\) we speak of \textit{vector quantization}. 
+Generally if we are given \(\{y_1, ..., y_m\} \subseteq R\), the optimal quantizer \(V\) is characterized by 
+\[u \mapsto \hat{u} = y_k, \quad k \in \underset{j}{\arg \min} ||u - y_j||\]
+This induces Voronoi cells around the \(y_j\), which individually are convex regions (for \(d = 1\) these are intervals).
+
+\textbf{Centroid Condition.} \[\underset{y}{\arg \min}\E((U - y)^2) = \E(U)\]
