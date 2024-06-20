@@ -1,0 +1,88 @@
+\section{Estimation}
+\textbf{Laplace Distribution} is characterized by the pdf
+\[p(x; \mu, b) = \frac{1}{2b}\exp\left(-\frac{|x-\mu|}{b}\right)\]
+with parameters \(\theta = (\mu, b) \in \Theta = \R \times \R_+\).
+
+Any function \(\phi\) of a RV \(X\) is called a \textbf{statistic} of \(X\).
+
+A statistic \(\phi\) of \(X\) is \textbf{sufficient} for \(Y\), if \(X \perp Y | \phi(X)\).
+
+It is \textbf{minimally sufficient}, if for all other statistics \(\phi'\), \(X \perp \phi'(X) | \phi(X)\).
+
+\textbf{Halmos-Savage Factorization Theorem.} Let \(p_\theta\) be family of pdf parameterized by \(\theta\). 
+Then \(\phi\) is sufficient for \(\theta\), iff. there exists non-negative functions \(h, g_\theta\) s.t.
+\(p_\theta = h(x)g_\theta(x)\).
+
+\textbf{Exponential Family.} Let \(\phi\) be a sufficient statistic and \(h(x)\) a positive function. 
+The exponential family induced by \(\phi, h\) is characterized by the pdf
+\[p(x; \theta) = h(x)\exp(\theta\cdot\phi(x)-A(\theta)), \ A(\theta) = \ln \int h(x) \exp(\theta \cdot \phi(x))dx\]
+\textbf{Bernoulli} \(h \equiv 1, \phi(x) = x, \theta = \ln \frac{p}{1-p}, A(\theta) = \ln(1+e^\theta)\).
+
+\textbf{Binomial} \(h(x) = \binom{n}{x}, \phi(x) = x, \theta =  \ln \frac{p}{1-p}, A(\theta) = n \ln(1+e^\theta)\).
+
+\textbf{Normal} \(h(x) = \frac{1}{\sqrt{2}}, \phi(x) = (x, x^2)^\top, \theta = \left(\frac{\mu}{\sigma^2}, -\frac{1}{2\sigma^2}\right), 
+A(\theta) = -\frac{\theta_1^2}{4\theta_2} + \ln\left(\frac{1}{\sqrt{-2\theta_2}}\right)\)  
+
+Let \(X_1, ..., X_n\) be iid. with pdf \(p(x; \theta)\) in an exponential family. 
+Then the joint distribution is also an expenonetial family 
+with sufficient statistic \(\phi(X_1, ..., X_n) = \sum_{i = 1}^n \phi(X_i)\).
+
+When estimating parameters from iid samples, there is a fixed-dimensinoal sufficient statistic 
+iff. the distributions can be represented as an exponential family.
+
+\textbf{MLE}
+
+\textbf{Binomial} \(\hat{p} = \frac{1}{n}\sum_{i = 1}^n x_i\)
+
+\textbf{Normal} \(\hat{\mu} = \frac{1}{n}\sum_{i= 1}^n x_i, \hat{\sigma}^2 = \frac{1}{n}\sum_{i = 1}^n (x_i - \hat{\mu})^2\)
+
+
+\textbf{Laplace} \(\hat{\mu} = \text{median}(x_1, ...,x_n), \hat{b} = \frac{1}{n}\sum_{i=1}^n|x_i-\hat{\mu}|\).
+
+For an exponential family we have
+\[\nabla_\theta \sum_{i = 1}^n \log p_\theta(x_i) = 0 \iff \E_\theta(\phi(X)) = \frac{1}{n}\sum_{i = 1}^n\phi(x_i)\]
+
+\textbf{Maximum Entropy Inference}
+
+Statistical inference without parametric families.
+
+Given constraint functions \(\phi_i: R \subseteq \R \to \R\) and empirical values \(\bar{\phi}_i\). Consider
+\[\mathcal{P} = \{p: R \to [0, 1] \mid \E_p(\phi_i(X)) = \bar{\phi}_i (\forall i) \}\neq \emptyset\]
+Define the exponential family
+\[p_{\theta}(x) = \exp(\phi(x)\cdot \theta - A(\theta)).\]
+Let \(p_{\hat{\theta}}\) be the pdf obtained for the MLE \(\hat{\theta}\) based on data summaries 
+\(\bar{\phi}_i\), then
+\[p_{\hat{\theta}} = \underset{p \in \mathcal{P}}{\arg \max} \ h(p), \text{ with } h(p) = - \int p(x) \ln p(x) d\]
+
+\textbf{Fisher Information}
+
+Let \(p_\theta\) be a parametric family of pdfs. 
+
+For an estimator \(\hat{\theta}\) and the true parameter \(\theta^*\), we define 
+\(\text{MSE}(\hat{\theta}) = \E((\hat{\theta}(X_1, ..., X_n) - \theta^*)^2)\).
+
+The \textbf{score} is an RV \(S(X) = \nabla_\theta \log p_\theta(X)\).
+
+We have \(\E(S(X)|\theta) = 0\), and the \textbf{Fisher Information} is 
+symmetric positive semi-definite matrix \(\mathcal{I}(\theta) = \E(S(X)S(X)^\top | \theta)\).
+
+For \(X_1, ..., X_n \overset{iid}{\sim} p_{\theta}\) we have \(S(X_1, ...,X_n) = n S(X_1)\).
+
+For \(X, Y \sim p_{\theta}\) we have \(S(X, Y) = S(X|Y)+S(Y)\) and by that 
+\(\mathcal{I}_{X, Y}(\theta) = \mathcal{I}_{Y|X}(\theta) + \mathcal{I}_{X}(\theta)\).
+
+If \(p_\theta\) twice-differentiable, then \(\mathcal{I}(\theta) = -\E(\nabla_\theta^2 \log p_\theta(X))\).
+
+\textbf{Cramér-Rao Bound}
+
+Let \(p_\theta(x)\) be a parameterized family of pdfs for a real-valued RV \(X\). 
+Let \(\hat{\theta} = T(X)\) be an unbiased estimator, i.e. \(\E_\theta(T(X)- \theta) = 0\), then 
+\[\text{MSE}(\hat{\theta}) \geq \mathcal{I}(\theta)^{-1}\]
+
+An unbiased estimator \(\hat{\theta}\) is \textbf{efficient}, if it attains the Cramér-Rao bound with equality.
+
+\textbf{Rao-Blackwell Theorem}
+
+Given an estimator \(\hat{\theta}\) for the parameter of a family with sufficient statistics \(T\) define an estimator
+\(\bar{\theta} = \E(\hat{\theta} | T)\), then 
+\[\text{MSE}(\bar{\theta}) \leq \text{MSE}(\hat{\theta})\]
