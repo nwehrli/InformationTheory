@@ -64,4 +64,22 @@ Generally if we are given \(\{y_1, ..., y_m\} \subseteq R\), the optimal quantiz
 \[u \mapsto \hat{u} = y_k, \quad k \in \underset{j}{\arg \min} ||u - y_j||\]
 This induces Voronoi cells around the \(y_j\), which individually are convex regions (for \(d = 1\) these are intervals).
 
-\textbf{Centroid Condition.} \[\underset{y}{\arg \min}\E((U - y)^2) = \E(U)\]
+\textbf{Centroid Condition.} Given a partition \(\{R_j\}\) of \(R \subseteq \R^n\), the optimal code points are 
+\[y_j = \E(U | U \in R_j), \text{ empirically w/ dataset }\mathcal{X}: 
+\frac{\sum_{x \in \mathcal{X}\cap R_j}x}{|\mathcal{X}\cap R_j|}\]
+\textbf{Loyld's Algorithm}
+\begin{enumerate}
+    \item Generate random code points \(y_j\) at random and the induced Voronoi cells \(R_j\).
+    \item For each cell, recompute the centroid. Then update the newly induced Voronoi cells.
+    \item Repeat Step 2 until convergence.
+\end{enumerate}
+This algorithm fixes \(m\) as the number cells (encoding cost \(\log m\) bits) 
+and then optimizes (locally) for distortion.
+
+The relevant quantity for encoding cost should not be the number of cells, 
+but the Entropy of the discretized RV \(V\).
+
+\[\ell(V) = \E((U-V)^2) + \lambda H(V), \quad \lambda > 0\]
+\textbf{Blahut Arimoto Algorithm} 
+\[\P(y_j|x_i) = \frac{\pi_j \exp(-\lambda||x_i-y_j||^2)}{\sum_{k = 1}^m \pi_k \exp(-\lambda||x_i-y_k||^2)}, \ \pi_j = \frac{1}{n}\sum_{i = 1}^s \P(y_j|x_i)\]
+and we generalize the centroid rule with weights \(y_j^* = \frac{\sum_{i = 1}^s \P(y_j|x_i)x_i}{\sum_{i = 1}^s \P(y_j|x_i)}\).
