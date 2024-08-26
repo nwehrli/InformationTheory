@@ -24,8 +24,12 @@ Then \(F_U(u) = u\) and \(U = (0.U_1U_2...) \implies U_i \overset{iid}{\sim} \te
 
 \begin{itemize}[label=-]
     \item encoder \(x_1, x_2,... \mapsto z = (0.x_1x_2...)_m \overset{F_Z}{\mapsto} u = (0.u_1u_2...)_2\)
-    \item decoder \(u \overset{F_Z^{-1}}{\mapsto} z = (0.x_1x_2...)_m \mapsto x_1x_2\)
+    \item decoder \(u \overset{F_Z^{-1}}{\mapsto} z = (0.x_1x_2...)_m \mapsto x_1x_2...\)
 \end{itemize}
+
+In general 
+\[F_Z((0.x_1x_2...)_m) = \sum_{k = 1}^\infty \sum_{i < x_{k}}p((0.x_1...x_{k-1}i)_m)\]
+
 
 Consider \(X =(X_1, ...,X_n)\) with \(X: \Omega \to A^n\) and thus \(m^n\) possible outcomes.
 
