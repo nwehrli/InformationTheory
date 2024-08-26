@@ -1,3 +1,4 @@
+\vspace*{-3mm}
 \section{Estimation}
 \textbf{Laplace Distribution} is characterized by the pdf
 \[p(x; \mu, b) = \frac{1}{2b}\exp\left(-\frac{|x-\mu|}{b}\right)\]
@@ -90,3 +91,10 @@ An unbiased estimator \(\hat{\theta}\) is \textbf{efficient}, if it attains the 
 Given an estimator \(\hat{\theta}\) for the parameter of a family with sufficient statistics \(T\) define an estimator
 \(\bar{\theta} = \E(\hat{\theta} | T)\), then 
 \[\text{MSE}(\bar{\theta}) \leq \text{MSE}(\hat{\theta})\]
+
+\textbf{N-Grams Perplexity}
+\(\text{PP}(q) = 2^{H(p;q)}\), where \(q\) is the model and \(p\) is the testset/true distribution
+
+\textbf{Free Energy} 
+
+\(\mathcal{F}(Q, y) = \E_Q(\log Q(X) - \log P(X, y)) = D(Q(X)||P(X|y)) - \log P(y)\)
