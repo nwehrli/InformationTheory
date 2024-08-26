@@ -10,7 +10,7 @@ We consider \(\E(d(X, \hat{X}))\), where \(X\) is original data and \(\hat{X}\) 
 \textbf{Rate Distortion Theorem.}
 The maximal rate \(R(D)\) at which \(X\) (\(\P(X)\) given) can 
 be encoded with  \(\E(d(X, \hat{X})) \leq D\) is given by
-\[R(D) = \underset{\P(\hat{X}|X): \E(d(X, \hat{X}))}{I(X, \hat{X})}\]
+\[R(D) = \underset{\P(\hat{X}|X): \E(d(X, \hat{X})) \leq D}{\min I(X, \hat{X})}\]
 Consider the specific Case \(X_t \overset{iid}{\sim} \text{Ber}(p)\) and \(d(x^n, \hat{x}^n) = \frac{1}{n}d_H(x^n, \hat{x}^n)\).
 Then requiring \(\P(X_t \neq \hat{X}_t) \leq \eta\) (wlog. \(\eta \leq p\leq 1/2\)), 
 and minimizing the mutual information \(I(X;\hat{X})\) gives us a symmetric backwards channel 

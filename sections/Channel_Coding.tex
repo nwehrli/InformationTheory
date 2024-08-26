@@ -93,3 +93,15 @@ covers all positions where the \(i\)-th least significant bit is set (including 
 The sum of positions of the mismatched parity bits gives the position of the corrupted bit.
 
 The rate achieved is \[R = \frac{2^k-k-1}{2^k-1}\]
+
+\textbf{Symmetric Channels}
+
+Consider the transition matrix \(P = p(y|x)\) as defined in \textbf{this lecture}. The channel is 
+\textbf{symmetric} if the rows/columns are permutations of eachother.
+The channel is \textbf{weakly symmetric} if the columns are permutations of eachother and every row sum is equal.
+
+For a \textbf{weakly symmetric} channel
+\[C = \log |\mathcal{Y}| - H(\textit{column of transition matrix})\]
+achieved by uniform distribution over \(\mathcal{X}\).
+
+For a channel containing two \textbf{parallel channels}: \(2^C = 2^{C_1}+2^{C_2}\)

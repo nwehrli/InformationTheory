@@ -32,6 +32,10 @@ We can find an optimal strategy using analysis (taking care of border cases).
 
 % There is a corollary missing here, which seems wrong.
 
-% \textbf{Risky bets.} With \(\beta = 1\) and \(p \to 0\) while fixing \(\alpha p\), one gets
-% \[\alpha b^* = \alpha p - (1-p) \to \alpha p\]
+\textbf{Risky bets.} With \(\beta = 1\) and \(p \to 0\) while \(\alpha p \to \infty\), one gets
+\[b = p - \frac{1-p}{\alpha} = \frac{\alpha p - 1 + p}{\alpha} \to p\]
+
+\textbf{Log-sum inequality}
+\[\sum_{i = 1}^n a_i \log \frac{a_i}{b_i} \geq \left(\sum_{i = 1}^n a_i\right) \cdot 
+\left(\log \frac{\sum_{i= 1}^n a_i}{\sum_{i = 1}^n b_i}\right)\]
 

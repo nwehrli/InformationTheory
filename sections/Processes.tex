@@ -7,7 +7,7 @@ A semi-infinite sequence of random variables \(X_1, X_2, ... \) is a \textbf{sto
     \[\P(X_1, ..., X_n) = \P(X_{1+\Delta}, ..., X_{n+\Delta})\] 
     \item \textbf{Conditional Entropy Rate.} 
     \[H(X) = \lim_{t \to \infty} H(X_{t+1} | X_t, ..., X_1)\]
-    \item \(X\) stationary \(\implies\) \(H(X)\) well-defined.
+    \item \(X\) stationary \(\implies\) \(H(X) = H'(X)\) well-defined.
     \item \textbf{Entropy Rate.} \[H'(X) = \lim_{t \to \infty} \frac{1}{t}H(X_1, ..., X_t)\] 
 \end{itemize}
 
@@ -25,7 +25,7 @@ Let \(X\) be a Markov Chain and \(\pi := P(X_1)\).
     \item M.C. \(X\) \textbf{stationary} \\\(\iff\) \(\pi\) stationary and \(X\) time-homogeneous \(\iff\) \(P \pi = \pi\)
     \item\textbf{Entropy Rate} of a stationary time-homogeneous M.C. 
     \[H'(X) = H(X) = \sum_{a}\pi_a \left(- \sum_{b}P_{ba} \log P_{ba}\right)\]
-    Note that \(H' = H\) if \(X\) is \textbf{stationary}.
+    % Note that \(H' = H\) if \(X\) is \textbf{stationary}.
     \item A M.C. is \textbf{ergodic}, iff. \(\exists t \geq 1\) s.t. \((P^t)_{ij} > 0, \forall i, j.\)
     \item An M.C. \textbf{ergodic} \(\iff\) has a unique stationary distribution
     \item For stationary M.C. \(H(X_t | X_1) \leq H(X_{t+1}|X_1)\).
