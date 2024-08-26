@@ -23,6 +23,9 @@ The exponential family induced by \(\phi, h\) is characterized by the pdf
 \textbf{Normal} \(h(x) = \frac{1}{\sqrt{2}}, \phi(x) = (x, x^2)^\top, \theta = \left(\frac{\mu}{\sigma^2}, -\frac{1}{2\sigma^2}\right), 
 A(\theta) = -\frac{\theta_1^2}{4\theta_2} + \ln\left(\frac{1}{\sqrt{-2\theta_2}}\right)\)  
 
+
+\textbf{Exponential} \(h(x) \equiv 1, \phi(x) = -x, \theta = \lambda, A(\theta) = - \ln \lambda, x \geq 0\)
+
 Let \(X_1, ..., X_n\) be iid. with pdf \(p(x; \theta)\) in an exponential family. 
 Then the joint distribution is also an expenonetial family 
 with sufficient statistic \(\phi(X_1, ..., X_n) = \sum_{i = 1}^n \phi(X_i)\).
@@ -38,6 +41,7 @@ iff. the distributions can be represented as an exponential family.
 
 
 \textbf{Laplace} \(\hat{\mu} = \text{median}(x_1, ...,x_n), \hat{b} = \frac{1}{n}\sum_{i=1}^n|x_i-\hat{\mu}|\).
+
 
 For an exponential family we have
 \[\nabla_\theta \sum_{i = 1}^n \log p_\theta(x_i) = 0 \iff \E_\theta(\phi(X)) = \frac{1}{n}\sum_{i = 1}^n\phi(x_i)\]
